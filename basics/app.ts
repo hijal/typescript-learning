@@ -1,5 +1,5 @@
 function add(n1: number, n2: number, showResult: boolean, phrase: string) {
-	const result = n1 + n2;
+	let result = n1 + n2;
 
 	if (showResult) {
 		console.log(phrase + result);
@@ -9,9 +9,13 @@ function add(n1: number, n2: number, showResult: boolean, phrase: string) {
 }
 
 // base types of typescript.
-const number1 = 5;
-const number2 = 2.8;
-const printResult = true;
-const phrase = 'Result is: ';
+let number1: number;
+number1 = 5; // assign a number
+//number1 = '5'; // error assign a string
+
+let number2 = 2.8;
+let printResult = true;
+let phrase = 'Result is: ';
+// phrase = 0;  // error
 
 add(number1, number2, printResult, phrase);
