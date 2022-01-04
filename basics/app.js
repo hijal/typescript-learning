@@ -1,15 +1,28 @@
-var TypeConversion;
-(function (TypeConversion) {
-    TypeConversion[TypeConversion["AS-NUMBER"] = 0] = "AS-NUMBER";
-    TypeConversion[TypeConversion["AS-TEXT"] = 1] = "AS-TEXT";
-})(TypeConversion || (TypeConversion = {}));
-function combine(n1, n2, conversion) {
-    if ((typeof n1 === 'number' && typeof n2 === 'number') ||
-        conversion === TypeConversion['AS-NUMBER']) {
-        return +n1 + +n2;
-    }
-    return n1.toString().toUpperCase() + ' ' + n2.toString().toUpperCase();
+function add(n1, n2) {
+    return n1 + n2;
 }
-console.log(combine(10, 10, TypeConversion['AS-NUMBER']));
-console.log(combine('10', '10', TypeConversion['AS-NUMBER']));
-console.log(combine('hijikesh', 'hijal', TypeConversion['AS-TEXT']));
+function display(result) {
+    console.log(result);
+}
+display(add(50, 50));
+function Bike(model, color) {
+    this.model = model;
+    this.color = color;
+}
+Bike.prototype.getDetails = function () {
+    return "The bike is ".concat(this.color, " and ").concat(this.model);
+};
+var bikeObj = new Bike('Pulsar', 'Red');
+console.log(bikeObj.getDetails());
+var Person = /** @class */ (function () {
+    function Person(height, color) {
+        this.height = height;
+        this.color = color;
+    }
+    Person.prototype.getDetails = function () {
+        return "The person is ".concat(this.color, " and ").concat(this.height);
+    };
+    return Person;
+}());
+var person = new Person('tall', 'black');
+console.log(person.getDetails());
