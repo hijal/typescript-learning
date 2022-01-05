@@ -1,11 +1,8 @@
-function functionAndCallback(name, age, cb) {
-    var result = {
-        name: name,
-        age: age
-    };
-    cb(result);
+var userInput;
+var userName;
+userInput = 5;
+userInput = 'hello unknown';
+if (typeof userInput === 'string') {
+    userName = userInput;
 }
-functionAndCallback('hijal', 27, function (obj) {
-    console.log('callback');
-    console.log(obj);
-});
+console.log(userName);
