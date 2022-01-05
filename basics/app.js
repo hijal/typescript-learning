@@ -1,8 +1,4 @@
-var userInput;
-var userName;
-userInput = 5;
-userInput = 'hello unknown';
-if (typeof userInput === 'string') {
-    userName = userInput;
+function generateError(message, code) {
+    throw { message: message, errorCode: code };
 }
-console.log(userName);
+generateError('An error ocurred!', 500);
