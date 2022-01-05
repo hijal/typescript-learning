@@ -1,28 +1,28 @@
-function add(n1, n2) {
-    return n1 + n2;
+function add(a, b) {
+    return a + b;
 }
 function display(result) {
     console.log(result);
 }
-display(add(50, 50));
-function Bike(model, color) {
-    this.model = model;
-    this.color = color;
-}
-Bike.prototype.getDetails = function () {
-    return "The bike is ".concat(this.color, " and ").concat(this.model);
-};
-var bikeObj = new Bike('Pulsar', 'Red');
-console.log(bikeObj.getDetails());
-var Person = /** @class */ (function () {
-    function Person(height, color) {
-        this.height = height;
-        this.color = color;
-    }
-    Person.prototype.getDetails = function () {
-        return "The person is ".concat(this.color, " and ").concat(this.height);
+display(add(1, 2));
+var combines;
+combines = add;
+// combines = display;
+// combines = 5;
+console.log(combines(10, 10));
+// person object js
+function findAll(name, age) {
+    return {
+        name: name,
+        age: age
     };
-    return Person;
-}());
-var person = new Person('tall', 'black');
-console.log(person.getDetails());
+}
+function response(obj) {
+    console.log(obj);
+}
+var showResponse;
+console.log('------------------------------');
+response(findAll('John', 30));
+console.log('------------------------------');
+showResponse = findAll;
+console.log(showResponse('John', 30));
