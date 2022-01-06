@@ -1,29 +1,36 @@
-const discount: (price: number, rate?: number) => number = (
-	price: number,
-	rate: number = 0.1
-) => {
-	return price * (1 - rate);
+// number to month
+console.log(
+	Intl.DateTimeFormat('en', {
+		month: 'long',
+	}).format(new Date('12'))
+);
+
+// spreed operator
+
+const arr = [1, 2, 3, 4, 5];
+
+const newArr = [10];
+newArr.push(...arr);
+
+console.log(newArr);
+
+// rest operator
+
+const bike = {
+	model: 'BMW',
+	color: 'red',
 };
 
-const getDay: (month: number, year?: number) => number = (
-	month: number,
-	year: number = new Date().getFullYear()
-) => {
-	const days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-	if (month === 2) {
-		// leap year condition
-		if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
-			return 29;
-		}
-		return 28;
-	}
-	return days[month - 1];
+const copiedBike = { ...bike };
+
+console.log('------------------------------');
+console.log('copy bike: ', copiedBike);
+console.log('------------------------------');
+
+const add: (...numbers: number[]) => number = (...numbers: number[]) => {
+	return numbers.reduce((acc, cur) => acc + cur, 0);
 };
 
-const display: (a: string | number, message: string) => void = (
-	result,
-	message
-) => console.log(message + ': ', result);
+const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-display(discount(10), 'Discount');
-display(getDay(2), `Days`);
+console.log(add(...list));

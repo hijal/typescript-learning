@@ -1,20 +1,39 @@
 "use strict";
-var discount = function (price, rate) {
-    if (rate === void 0) { rate = 0.1; }
-    return price * (1 - rate);
-};
-var getDay = function (month, year) {
-    if (year === void 0) { year = new Date().getFullYear(); }
-    var days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    if (month === 2) {
-        // leap year condition
-        if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
-            return 29;
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
         }
-        return 28;
-    }
-    return days[month - 1];
+        return t;
+    };
+    return __assign.apply(this, arguments);
 };
-var display = function (result, message) { return console.log(message + ': ', result); };
-display(discount(10), 'Discount');
-display(getDay(2), "Days");
+// number to month
+console.log(Intl.DateTimeFormat('en', {
+    month: 'long',
+}).format(new Date('12')));
+// spreed operator
+var arr = [1, 2, 3, 4, 5];
+var newArr = [10];
+newArr.push.apply(newArr, arr);
+console.log(newArr);
+// rest operator
+var bike = {
+    model: 'BMW',
+    color: 'red',
+};
+var copiedBike = __assign({}, bike);
+console.log('------------------------------');
+console.log('copy bike: ', copiedBike);
+console.log('------------------------------');
+var add = function () {
+    var numbers = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        numbers[_i] = arguments[_i];
+    }
+    return numbers.reduce(function (acc, cur) { return acc + cur; }, 0);
+};
+var list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+console.log(add.apply(void 0, list));
