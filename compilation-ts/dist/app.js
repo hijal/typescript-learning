@@ -1,4 +1,4 @@
 "use strict";
 console.log('------------------------------');
-console.log('test ts file root folder');
+console.log('app ts file inside folder');
 console.log('------------------------------');
