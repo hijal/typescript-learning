@@ -1,5 +1,5 @@
 class Department {
-	private employees: string[] = [];
+	protected employees: string[] = [];
 
 	constructor(private readonly id: string, public name: string) {}
 
@@ -26,12 +26,19 @@ class AccountingDepartment extends Department {
 		super(id, 'Accounting');
 	}
 
-	addReport(report: string) {
+	addReport(report: string): void {
 		this.reports.push(report);
 	}
 
-	printReports() {
+	printReports(): void {
 		console.log(this.reports);
+	}
+	// method override
+	addEmployee(employee: string): void {
+		if (employee === 'hijal') {
+			return;
+		}
+		this.employees.push(employee);
 	}
 }
 
@@ -47,3 +54,8 @@ Ac.addReport('report01');
 Ac.addReport('report02');
 
 Ac.printReports();
+
+Ac.addEmployee('hijal');
+Ac.addEmployee('nasir');
+
+Ac.displayEmployee();

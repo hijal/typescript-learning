@@ -53,6 +53,13 @@ var AccountingDepartment = /** @class */ (function (_super) {
     AccountingDepartment.prototype.printReports = function () {
         console.log(this.reports);
     };
+    // method override
+    AccountingDepartment.prototype.addEmployee = function (employee) {
+        if (employee === 'hijal') {
+            return;
+        }
+        this.employees.push(employee);
+    };
     return AccountingDepartment;
 }(Department));
 var it = new ITDepartment('d1', ['hijal']);
@@ -64,4 +71,7 @@ console.log(Ac);
 Ac.addReport('report01');
 Ac.addReport('report02');
 Ac.printReports();
+Ac.addEmployee('hijal');
+Ac.addEmployee('nasir');
+Ac.displayEmployee();
 //# sourceMappingURL=app.js.map
