@@ -1,5 +1,8 @@
-interface Greet {
-	name: string;
+interface Named {
+	readonly name: string;
+}
+
+interface Greet extends Named {
 	greet(message: string): void;
 }
 
