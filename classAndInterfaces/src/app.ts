@@ -1,8 +1,12 @@
 class Department {
+	static fiscalYear = 2022;
 	protected employees: string[] = [];
 
 	constructor(private readonly id: string, public name: string) {}
 
+	static helloWorld(name: string) {
+		console.log('Hello, ' + name);
+	}
 	describe(this: Department) {
 		console.log('Department: ' + this.name + ' and ' + this.id);
 	}
@@ -56,6 +60,10 @@ class AccountingDepartment extends Department {
 		this.employees.push(employee);
 	}
 }
+
+console.log(Department.helloWorld('Hijal'));
+
+console.log(Department.fiscalYear);
 
 const it = new ITDepartment('d1', ['hijal']);
 console.log(it);
