@@ -3,17 +3,26 @@
 var add;
 add = function (a, b) { return a + b; };
 var Person = /** @class */ (function () {
-    function Person(name) {
+    function Person(name, username) {
         this.age = 10;
-        this.name = name;
+        if (name) {
+            this.name = name;
+        }
+        if (username) {
+            this.username = username;
+        }
     }
     Person.prototype.greet = function (message) {
-        console.log(message + ' ' + this.name);
+        if (this.name) {
+            console.log("".concat(message, " ' ' ").concat(this.name));
+        }
+        return;
     };
     return Person;
 }());
 var user1;
-user1 = new Person('hijal');
+// user1 = new Person();
+user1 = new Person("John", "john");
 user1.greet('Hello');
 console.log('------------------------------');
 console.log(user1);
