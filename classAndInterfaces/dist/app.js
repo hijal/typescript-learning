@@ -23,9 +23,6 @@ var Department = /** @class */ (function () {
     Department.helloWorld = function (name) {
         console.log('Hello, ' + name);
     };
-    Department.prototype.describe = function () {
-        console.log('Department: ' + this.name + ' and ' + this.id);
-    };
     Department.prototype.addEmployee = function (employee) {
         this.employees.push(employee);
     };
@@ -42,6 +39,9 @@ var ITDepartment = /** @class */ (function (_super) {
         _this.admins = admins;
         return _this;
     }
+    ITDepartment.prototype.describe = function () {
+        console.log('IT Department - ID: ' + this.id);
+    };
     return ITDepartment;
 }(Department));
 var AccountingDepartment = /** @class */ (function (_super) {
@@ -83,12 +83,15 @@ var AccountingDepartment = /** @class */ (function (_super) {
         }
         this.employees.push(employee);
     };
+    AccountingDepartment.prototype.describe = function () {
+        console.log('Accounting Department - ID: ' + this.id);
+    };
     return AccountingDepartment;
 }(Department));
-console.log(Department.helloWorld('Hijal'));
+Department.helloWorld('Hijal');
 console.log(Department.fiscalYear);
 var it = new ITDepartment('d1', ['hijal']);
-console.log(it);
+it.describe();
 it.addEmployee('john');
 var Ac = new AccountingDepartment('d2', []);
 // const Ac = new AccountingDepartment('d2', ['report01']);
@@ -100,4 +103,5 @@ Ac.printReports();
 Ac.addEmployee('hijal');
 Ac.addEmployee('nasir');
 Ac.displayEmployee();
+Ac.describe();
 //# sourceMappingURL=app.js.map

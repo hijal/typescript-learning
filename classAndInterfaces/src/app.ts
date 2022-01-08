@@ -1,15 +1,15 @@
-class Department {
+abstract class Department {
 	static fiscalYear = 2022;
 	protected employees: string[] = [];
 
-	constructor(private readonly id: string, public name: string) {}
+	constructor(protected readonly id: string, public name: string) {}
 
 	static helloWorld(name: string) {
 		console.log('Hello, ' + name);
 	}
-	describe(this: Department) {
-		console.log('Department: ' + this.name + ' and ' + this.id);
-	}
+
+	abstract describe(this: Department): void;
+
 	addEmployee(employee: string) {
 		this.employees.push(employee);
 	}
@@ -22,6 +22,9 @@ class Department {
 class ITDepartment extends Department {
 	constructor(id: string, public admins: string[]) {
 		super(id, 'IT');
+	}
+	describe() {
+		console.log('IT Department - ID: ' + this.id);
 	}
 }
 
@@ -59,14 +62,17 @@ class AccountingDepartment extends Department {
 		}
 		this.employees.push(employee);
 	}
+	describe() {
+		console.log('Accounting Department - ID: ' + this.id);
+	}
 }
 
-console.log(Department.helloWorld('Hijal'));
+Department.helloWorld('Hijal')
 
 console.log(Department.fiscalYear);
 
 const it = new ITDepartment('d1', ['hijal']);
-console.log(it);
+it.describe()
 
 it.addEmployee('john');
 
@@ -82,3 +88,5 @@ Ac.addEmployee('hijal');
 Ac.addEmployee('nasir');
 
 Ac.displayEmployee();
+
+Ac.describe();
