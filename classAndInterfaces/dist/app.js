@@ -1,4 +1,7 @@
 "use strict";
+// type AddFn = (a: number, b: number) => number;
+var add;
+add = function (a, b) { return a + b; };
 var Person = /** @class */ (function () {
     function Person(name) {
         this.age = 10;
