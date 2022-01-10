@@ -1,54 +1,14 @@
-type Admin = {
-	name: string;
-	hobbies: string[];
-};
+type CombineStringOrNumber = string | number;
+type CombineNumberOrBoolean = number | boolean;
 
-type Admin2 = {
-	name: string;
-	age: number;
-};
+type CombineAll = CombineStringOrNumber & CombineNumberOrBoolean;
 
-type CombineAdmin = Admin & Admin2;
-
-const ad1: CombineAdmin = {
-	name: 'John',
-	age: 30,
-	hobbies: ['Sports', 'Cooking'],
-};
-
-console.log('------------------------------');
-console.log(ad1);
-console.log('------------------------------');
-
-interface Animal {
-	name: string;
-	color: string;
+function add(a: CombineAll, b: CombineAll) {
+	if (typeof a === 'string' || typeof b === 'string') {
+		// type guard
+		return a.toString() + b.toString();
+	}
+	return a + b;
 }
 
-interface Cat {
-	name: string;
-	origin: string;
-}
-
-interface CombineAnimal extends Animal, Cat {}
-
-const animal1: CombineAnimal = {
-	name: 'Abyssinian',
-	color: 'black',
-	origin: 'Egypt',
-};
-
-console.log('------------------------------');
-console.log(animal1);
-console.log('------------------------------');
-
-type StringOrNumber = string | number;
-type NumberOrBoolean = number | boolean;
-
-type CombineStringNumberBoolean = StringOrNumber & NumberOrBoolean;
-
-// const test1 : CombineStringNumberBoolean = 'Hello TypeScript!'; // expect number get string
-const test1: CombineStringNumberBoolean = 1000;
-console.log('------------------------------');
-console.log(test1);
-console.log('------------------------------');
+console.log(add(1, 2));
