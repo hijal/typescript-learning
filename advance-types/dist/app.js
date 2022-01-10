@@ -1,10 +1,17 @@
 "use strict";
-function add(a, b) {
-    if (typeof a === 'string' || typeof b === 'string') {
-        // type guard
-        return a.toString() + b.toString();
+const emp1 = {
+    name: 'hijal',
+    privileges: ['create-server'],
+    startDate: new Date(),
+};
+function displayInformation(emp) {
+    console.log(`Name: ${emp.name}`);
+    if ('privileges' in emp) {
+        console.log(`Privileges: ${emp.privileges}`);
     }
-    return a + b;
+    if ('startDate' in emp) {
+        console.log(`Start Date: ${emp.startDate}`);
+    }
 }
-console.log(add(1, 2));
+displayInformation(emp1);
 //# sourceMappingURL=app.js.map

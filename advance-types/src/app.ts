@@ -1,14 +1,29 @@
-type CombineStringOrNumber = string | number;
-type CombineNumberOrBoolean = number | boolean;
+type Admin = {
+	name: string;
+	privileges: string[];
+};
 
-type CombineAll = CombineStringOrNumber & CombineNumberOrBoolean;
+type Employee = {
+	name: string;
+	startDate: Date;
+};
 
-function add(a: CombineAll, b: CombineAll) {
-	if (typeof a === 'string' || typeof b === 'string') {
-		// type guard
-		return a.toString() + b.toString();
+type ElevatedEmployee = Admin & Employee;
+
+const emp1: ElevatedEmployee = {
+	name: 'hijal',
+	privileges: ['create-server'],
+	startDate: new Date(),
+};
+
+function displayInformation(emp: ElevatedEmployee) {
+	console.log(`Name: ${emp.name}`);
+	if ('privileges' in emp) {
+		console.log(`Privileges: ${emp.privileges}`);
 	}
-	return a + b;
+	if ('startDate' in emp) {
+		console.log(`Start Date: ${emp.startDate}`);
+	}
 }
 
-console.log(add(1, 2));
+displayInformation(emp1);
