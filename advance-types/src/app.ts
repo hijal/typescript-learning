@@ -27,3 +27,32 @@ function displayInformation(emp: ElevatedEmployee) {
 }
 
 displayInformation(emp1);
+
+class Car {
+	drive() {
+		console.log('driving car...');
+	}
+}
+
+class Truck {
+	drive() {
+		console.log('driving truck...');
+	}
+
+	loadCargo(amount: number) {
+		console.log('loading cargo...' + amount);
+	}
+}
+
+type Vehicle = Car | Truck;
+
+function useVehicle(vehicle: Vehicle) {
+	vehicle.drive();
+
+	if ('loadCargo' in vehicle) vehicle.loadCargo(10);
+
+	if (vehicle instanceof Truck) vehicle.loadCargo(10000);
+}
+
+useVehicle(new Car());
+useVehicle(new Truck());

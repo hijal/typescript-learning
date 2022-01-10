@@ -14,4 +14,26 @@ function displayInformation(emp) {
     }
 }
 displayInformation(emp1);
+class Car {
+    drive() {
+        console.log('driving car...');
+    }
+}
+class Truck {
+    drive() {
+        console.log('driving truck...');
+    }
+    loadCargo(amount) {
+        console.log('loading cargo...' + amount);
+    }
+}
+function useVehicle(vehicle) {
+    vehicle.drive();
+    if ('loadCargo' in vehicle)
+        vehicle.loadCargo(10);
+    if (vehicle instanceof Truck)
+        vehicle.loadCargo(10000);
+}
+useVehicle(new Car());
+useVehicle(new Truck());
 //# sourceMappingURL=app.js.map
