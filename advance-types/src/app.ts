@@ -1,30 +1,29 @@
-interface ErrorContainer {
-  [prop: string]: string | number;
-}
+let user = {
+  id: 1,
+  name: "Leanne Graham",
+  username: "Bret",
+  email: "Sincere@april.biz",
+  address: {
+    street: "Kulas Light",
+    suite: "Apt. 556",
+    city: "Gwenborough",
+    zipcode: "92998-3874",
+    geo: {
+      lat: "-37.3159",
+      lng: "81.1496",
+    },
+  },
+  phone: "1-770-736-8031 x56442",
+  website: "hildegard.org",
+  company: {
+    name: "Romaguera-Crona",
+    catchPhrase: "Multi-layered client-server neural-net",
+    bs: "harness real-time e-markets",
+  },
+};
 
-let errorBag: ErrorContainer = {};
+console.log(user?.address?.geo?.lat);
 
-errorBag.email = "hello@test.com";
-errorBag.name = "hello test";
-errorBag.age = 123;
+let hello = '';
 
-console.log("------------------------------");
-console.log(errorBag);
-console.log("------------------------------");
-
-type numberOrString = number | string;
-type numberOrBoolean = number | boolean;
-
-type universal = numberOrString & numberOrBoolean;
-
-function addition(a: number, b: number): number;
-function addition(a: string, b: string): string;
-
-function addition(a: numberOrString, b: numberOrString) {
-  if (typeof a === "string" || typeof b === "string") {
-    return a.toString() + b.toString();
-  }
-  return a + b;
-}
-
-const result = addition(1, 5);
+let check = hello ?? 'hello';
