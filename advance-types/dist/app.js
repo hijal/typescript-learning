@@ -1,13 +1,13 @@
 "use strict";
 let errorBag = {};
-errorBag.email = 'hello@test.com';
-errorBag.name = 'hello test';
+errorBag.email = "hello@test.com";
+errorBag.name = "hello test";
 errorBag.age = 123;
-console.log('------------------------------');
+console.log("------------------------------");
 console.log(errorBag);
-console.log('------------------------------');
+console.log("------------------------------");
 function addition(a, b) {
-    if (typeof a === 'string' || typeof b === 'string') {
+    if (typeof a === "string" || typeof b === "string") {
         return a.toString() + b.toString();
     }
     return a + b;
