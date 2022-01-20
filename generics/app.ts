@@ -1,30 +1,17 @@
-const names: Array<string> = [];
-names.push('John');
-names.push('Jane');
+// create generic function
 
-console.log('------------------------------');
-console.log('names:', names);
-console.log('------------------------------');
+function merge<T, U>(obj1: T, obj2: U): T & U {
+	return Object.assign(obj1, obj2);
+}
 
-let done = true;
+// console.log('------------------------------');
+// console.log(merge({ name: 'John' }, { age: 30 }));
+// console.log('------------------------------');
 
-const isItDoneYet = new Promise((resolve, reject) => {
-	if (done) {
-		const msg = 'Done!!!!';
-		return resolve(msg);
-	}
-	const why = 'Still working on something else...';
-	reject(why);
-});
+// const mergeObj = merge<{ name: string; hobbies: string[] }, { age: number }>(
+// 	{ name: 'John', hobbies: ['coding'] },
+// 	{ age: 30 }
+// );
 
-const checkIfItIsDone = () => {
-	isItDoneYet
-		.then((ok) => {
-			console.log(ok);
-		})
-		.catch((err) => {
-			console.log(err);
-		});
-};
-
-checkIfItIsDone();
+const mergeObj = merge({ name: 'John', hobbies: ['coding'] }, { age: 30 });
+console.log(mergeObj);
