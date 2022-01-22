@@ -5,21 +5,39 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-function Logger(constructor) {
-    console.log('logging......');
-    console.log('------------------------------');
-    console.log(constructor);
-    console.log('------------------------------');
+function Logger(logStr) {
+    return function (constructor) {
+        console.log(logStr);
+        console.log(constructor);
+    };
 }
-let Person = class Person {
-    constructor() {
-        this.name = 'Typescript';
-        console.log(this.name);
+function WithResult(template, hookId) {
+    return function (constructor) {
+        const shape = new constructor(10, 10);
+        const hookEl = document.getElementById(hookId);
+        if (hookEl) {
+            hookEl.innerHTML = template + ' : ' + shape.area;
+        }
+    };
+}
+let Rectangle = class Rectangle {
+    constructor(h, w) {
+        this.height = h;
+        this.width = w;
+    }
+    get area() {
+        return this.calcArea();
+    }
+    calcArea() {
+        return this.height * this.width;
     }
 };
-Person = __decorate([
-    Logger
-], Person);
-const person = new Person();
-console.log(person);
+Rectangle = __decorate([
+    WithResult('Area of shape ', 'app'),
+    Logger('Logging - Rectangle')
+], Rectangle);
+const square = new Rectangle(10, 10);
+console.log('------------------------------');
+console.log('Area:', square.area);
+console.log('------------------------------');
 //# sourceMappingURL=app.js.map
