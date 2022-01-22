@@ -1,44 +1,30 @@
-function Logger(logStr: string) {
-	console.log('Logger Factory');
-	return function (constructor: Function) {
-		console.log(logStr);
-		console.log(constructor);
-	};
+function Logger(target: any, prodName: string | Symbol) {
+	console.log('Property decorator');
+	console.log(target);
+	console.log(prodName);
 }
 
-function WithResult(template: string, hookId: string) {
-	console.log('Template Factory');
-	return function (constructor: any) {
-		console.log('Rendering template');
-		const shape = new constructor(10, 10);
-		const hookEl = document.getElementById(hookId);
-		if (hookEl) {
-			hookEl.innerHTML = template + ' : ' + shape.area;
+class Product {
+	@Logger
+	title: string;
+	private _price: number;
+
+	set price(val: number) {
+		if (val < 0) {
+			throw 'Invalid price - should be positive';
 		}
-	};
-}
-@Logger('Logging - Rectangle')
-@WithResult('Area of shape ', 'app')
-class Rectangle {
-	height: number;
-	width: number;
-
-	constructor(h: number, w: number) {
-		this.height = h;
-		this.width = w;
+		this._price = val;
 	}
 
-	get area() {
-		return this.calcArea();
+	constructor(t: string, p: number) {
+		this.title = t;
+		this._price = p;
 	}
 
-	calcArea() {
-		return this.height * this.width;
+	getPriceWithTax(tax: number) {
+		return this._price * (10 + tax);
 	}
 }
 
-const square = new Rectangle(10, 10);
-
-console.log('------------------------------');
-console.log('Area:', square.area);
-console.log('------------------------------');
+// const prod1 = new Product('Book', 20);
+// console.log(prod1.getPriceWithTax(5));

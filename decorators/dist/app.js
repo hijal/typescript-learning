@@ -5,42 +5,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-function Logger(logStr) {
-    console.log('Logger Factory');
-    return function (constructor) {
-        console.log(logStr);
-        console.log(constructor);
-    };
+function Logger(target, prodName) {
+    console.log('Property decorator');
+    console.log(target);
+    console.log(prodName);
 }
-function WithResult(template, hookId) {
-    console.log('Template Factory');
-    return function (constructor) {
-        console.log('Rendering template');
-        const shape = new constructor(10, 10);
-        const hookEl = document.getElementById(hookId);
-        if (hookEl) {
-            hookEl.innerHTML = template + ' : ' + shape.area;
+class Product {
+    constructor(t, p) {
+        this.title = t;
+        this._price = p;
+    }
+    set price(val) {
+        if (val < 0) {
+            throw 'Invalid price - should be positive';
         }
-    };
+        this._price = val;
+    }
+    getPriceWithTax(tax) {
+        return this._price * (10 + tax);
+    }
 }
-let Rectangle = class Rectangle {
-    constructor(h, w) {
-        this.height = h;
-        this.width = w;
-    }
-    get area() {
-        return this.calcArea();
-    }
-    calcArea() {
-        return this.height * this.width;
-    }
-};
-Rectangle = __decorate([
-    Logger('Logging - Rectangle'),
-    WithResult('Area of shape ', 'app')
-], Rectangle);
-const square = new Rectangle(10, 10);
-console.log('------------------------------');
-console.log('Area:', square.area);
-console.log('------------------------------');
+__decorate([
+    Logger
+], Product.prototype, "title", void 0);
+// const prod1 = new Product('Book', 20);
+// console.log(prod1.getPriceWithTax(5));
 //# sourceMappingURL=app.js.map
