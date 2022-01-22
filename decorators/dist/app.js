@@ -6,13 +6,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 function Logger(logStr) {
+    console.log('Logger Factory');
     return function (constructor) {
         console.log(logStr);
         console.log(constructor);
     };
 }
 function WithResult(template, hookId) {
+    console.log('Template Factory');
     return function (constructor) {
+        console.log('Rendering template');
         const shape = new constructor(10, 10);
         const hookEl = document.getElementById(hookId);
         if (hookEl) {
@@ -33,8 +36,8 @@ let Rectangle = class Rectangle {
     }
 };
 Rectangle = __decorate([
-    WithResult('Area of shape ', 'app'),
-    Logger('Logging - Rectangle')
+    Logger('Logging - Rectangle'),
+    WithResult('Area of shape ', 'app')
 ], Rectangle);
 const square = new Rectangle(10, 10);
 console.log('------------------------------');
