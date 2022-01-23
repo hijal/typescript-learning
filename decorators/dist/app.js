@@ -5,10 +5,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-function Logger(target, prodName) {
-    console.log('Property decorator');
+function Log(target, propertyName) {
+    console.log('Property decorator!');
+    console.log(target, propertyName);
+}
+function Log2(target, name, descriptor) {
+    console.log('Accessor decorator!');
     console.log(target);
-    console.log(prodName);
+    console.log(name);
+    console.log(descriptor);
 }
 class Product {
     constructor(t, p) {
@@ -16,18 +21,23 @@ class Product {
         this._price = p;
     }
     set price(val) {
-        if (val < 0) {
-            throw 'Invalid price - should be positive';
+        if (val > 0) {
+            this._price = val;
         }
-        this._price = val;
+        else {
+            throw new Error('Invalid price - should be positive!');
+        }
     }
     getPriceWithTax(tax) {
-        return this._price * (10 + tax);
+        return this._price * (1 + tax);
     }
 }
 __decorate([
-    Logger
+    Log
 ], Product.prototype, "title", void 0);
-// const prod1 = new Product('Book', 20);
-// console.log(prod1.getPriceWithTax(5));
+__decorate([
+    Log2
+], Product.prototype, "price", null);
+const p1 = new Product('Book', 19);
+const p2 = new Product('Book 2', 29);
 //# sourceMappingURL=app.js.map

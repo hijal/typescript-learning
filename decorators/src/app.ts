@@ -1,19 +1,27 @@
-function Logger(target: any, prodName: string | Symbol) {
-	console.log('Property decorator');
+function Log(target: any, propertyName: string | Symbol) {
+	console.log('Property decorator!');
+	console.log(target, propertyName);
+}
+
+function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
+	console.log('Accessor decorator!');
 	console.log(target);
-	console.log(prodName);
+	console.log(name);
+	console.log(descriptor);
 }
 
 class Product {
-	@Logger
+	@Log
 	title: string;
 	private _price: number;
 
+	@Log2
 	set price(val: number) {
-		if (val < 0) {
-			throw 'Invalid price - should be positive';
+		if (val > 0) {
+			this._price = val;
+		} else {
+			throw new Error('Invalid price - should be positive!');
 		}
-		this._price = val;
 	}
 
 	constructor(t: string, p: number) {
@@ -22,9 +30,9 @@ class Product {
 	}
 
 	getPriceWithTax(tax: number) {
-		return this._price * (10 + tax);
+		return this._price * (1 + tax);
 	}
 }
 
-// const prod1 = new Product('Book', 20);
-// console.log(prod1.getPriceWithTax(5));
+const p1 = new Product('Book', 19);
+const p2 = new Product('Book 2', 29);
