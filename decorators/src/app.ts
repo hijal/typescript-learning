@@ -1,38 +1,29 @@
-function WithTemplate(template: string, hookId: string) {
-	return function <T extends { new (...args: any[]): { area: number } }>(
-		originalConstructor: T
-	) {
-		return class extends originalConstructor {
-			constructor(..._: any[]) {
-				super(10, 10);
-				const hookEl = document.getElementById(hookId);
-				if (hookEl) {
-					hookEl.innerHTML = template;
-					(hookEl.querySelector('h1') as HTMLHeadElement).textContent =
-						'Area of Polygon: ' + this.area;
-					// this.area.toString();
-				}
-			}
-		};
+function AutoBind(
+	_: any,
+	_1: string | Symbol | number,
+	descriptor: PropertyDescriptor
+) {
+	const originalMethod = descriptor.value;
+	const adjDescriptor = {
+		configurable: true,
+		enumerable: false,
+		get() {
+			const boundFn = originalMethod.bind(this);
+			return boundFn;
+		},
 	};
+	return adjDescriptor;
 }
+class Printer {
+	message = 'Hello World';
 
-@WithTemplate('<h1>Test</h1>', 'app')
-class Polygon {
-	height: number;
-	width: number;
-
-	constructor(h: number, w: number) {
-		this.height = h;
-		this.width = w;
-	}
-
-	get area() {
-		return this.height * this.width;
+	@AutoBind
+	showMessage() {
+		console.log(this.message);
 	}
 }
 
-let p1 = new Polygon(10, 20);
-console.log('------------------------------');
-console.log(p1.area);
-console.log('------------------------------');
+const p = new Printer();
+
+const button = document.querySelector('button') as HTMLButtonElement;
+button?.addEventListener('click', p.showMessage);

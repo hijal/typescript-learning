@@ -5,35 +5,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-function WithTemplate(template, hookId) {
-    return function (originalConstructor) {
-        return class extends originalConstructor {
-            constructor(..._) {
-                super(10, 10);
-                const hookEl = document.getElementById(hookId);
-                if (hookEl) {
-                    hookEl.innerHTML = template;
-                    hookEl.querySelector('h1').textContent =
-                        'Area of Polygon: ' + this.area;
-                }
-            }
-        };
+function AutoBind(_, _1, descriptor) {
+    const originalMethod = descriptor.value;
+    const adjDescriptor = {
+        configurable: true,
+        enumerable: false,
+        get() {
+            const boundFn = originalMethod.bind(this);
+            return boundFn;
+        },
     };
+    return adjDescriptor;
 }
-let Polygon = class Polygon {
-    constructor(h, w) {
-        this.height = h;
-        this.width = w;
+class Printer {
+    constructor() {
+        this.message = 'Hello World';
     }
-    get area() {
-        return this.height * this.width;
+    showMessage() {
+        console.log(this.message);
     }
-};
-Polygon = __decorate([
-    WithTemplate('<h1>Test</h1>', 'app')
-], Polygon);
-let p1 = new Polygon(10, 20);
-console.log('------------------------------');
-console.log(p1.area);
-console.log('------------------------------');
+}
+__decorate([
+    AutoBind
+], Printer.prototype, "showMessage", null);
+const p = new Printer();
+const button = document.querySelector('button');
+button === null || button === void 0 ? void 0 : button.addEventListener('click', p.showMessage);
 //# sourceMappingURL=app.js.map
