@@ -1,29 +1,23 @@
-function AutoBind(
-	_: any,
-	_1: string | Symbol | number,
-	descriptor: PropertyDescriptor
-) {
-	const originalMethod = descriptor.value;
-	const adjDescriptor = {
-		configurable: true,
-		enumerable: false,
-		get() {
-			const boundFn = originalMethod.bind(this);
-			return boundFn;
-		},
-	};
-	return adjDescriptor;
-}
-class Printer {
-	message = 'Hello World';
+class Course {
+	title: string;
+	price: number;
 
-	@AutoBind
-	showMessage() {
-		console.log(this.message);
+	constructor(t: string, p: number) {
+		this.title = t;
+		this.price = p;
 	}
 }
 
-const p = new Printer();
+const formCourse = document.querySelector('form') as HTMLFormElement;
 
-const button = document.querySelector('button') as HTMLButtonElement;
-button?.addEventListener('click', p.showMessage);
+formCourse.addEventListener('submit', (e) => {
+	e.preventDefault();
+
+	const titleEl = document.querySelector('#title') as HTMLInputElement;
+	const priceEl = document.querySelector('#price') as HTMLInputElement;
+	const title = titleEl.value;
+	const price = +priceEl.value;
+
+	const course = new Course(title, price);
+	console.log(course);
+});
